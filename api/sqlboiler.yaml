@@ -1,0 +1,15 @@
+# Refer to https://github.com/aarondl/sqlboiler#configuration
+schema: public
+pkgname: dbmodel
+output: internal/repository/dbmodel
+no-hooks: true
+no-tests: true
+psql:
+  dbname: usecaseb-smarthire
+  host: db
+  port: 5432
+  user: usecaseb-smarthire
+  pass: ''
+  sslmode: disable
+  blacklist:
+    - schema_migrations

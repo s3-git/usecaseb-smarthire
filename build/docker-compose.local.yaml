@@ -1,0 +1,70 @@
+services:
+  db:
+    container_name: usecaseb-smarthire-db
+    image: postgres:14-alpine
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    networks:
+      - network
+    environment:
+      TZ: UTC
+      POSTGRES_USER: usecaseb-smarthire 
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  db-migrate:
+    container_name: usecaseb-smarthire-db-migrate
+    image: migrate/migrate:v4.19.0
+    profiles: [ "tools" ]
+    networks:
+      - network
+    volumes:
+      - ../api/data/migrations:/migrations
+    entrypoint:
+      [
+        "migrate",
+        "-path",
+        "/migrations",
+        "-database",
+        "postgres://usecaseb-smarthire@db:5432/usecaseb-smarthire?sslmode=disable",
+      ]
+    command: [ "up" ]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    container_name: usecaseb-smarthire-api
+    image: usecaseb-smarthire-go-local:latest
+    working_dir: /api
+    volumes:
+      - ../api:/api
+    command: go run -mod=vendor cmd/serverd/main.go cmd/serverd/router.go
+    ports:
+      - "3001:3001"
+    networks:
+      - network
+    depends_on:
+      - db
+    environment:
+      PG_URL: postgres://usecaseb-smarthire@db:5432/usecaseb-smarthire?sslmode=disable
+      SERVER_ADDR: ":3001"
+
+  mockery:
+    container_name: usecaseb-smarthire-mockery
+    image: vektra/mockery:v2.53.4
+    volumes:
+      - ../api:/api
+networks:
+  network:
+    name: usecaseb-smarthire
+
+volumes:
+  data:
