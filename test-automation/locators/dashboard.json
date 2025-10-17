@@ -1,0 +1,35 @@
+{
+  "common": {
+    "pageTitle": "h1",
+    "formContainer": ".dashboard-container"
+  },
+  "dashboard": {
+    "sidebar": ".dashboard-sidebar",
+    "sidebarMenu": ".sidebar-menu",
+    "sidebarMenuItem": ".sidebar-menu-item",
+    "mainContent": ".dashboard-main-content",
+    "header": ".dashboard-header",
+    "userInfo": ".user-info",
+    "notifications": ".notifications",
+    "notificationBell": ".notification-bell",
+    "notificationCount": ".notification-count",
+    "widgets": ".dashboard-widgets",
+    "widget": ".dashboard-widget",
+    "widgetTitle": ".widget-title",
+    "widgetContent": ".widget-content",
+    "quickActions": ".quick-actions",
+    "quickActionButton": ".quick-action-button",
+    "recentActivity": ".recent-activity",
+    "activityItem": ".activity-item",
+    "charts": ".dashboard-charts",
+    "chart": ".dashboard-chart",
+    "statsCards": ".stats-cards",
+    "statsCard": ".stats-card",
+    "statsValue": ".stats-value",
+    "statsLabel": ".stats-label",
+    "searchBar": ".dashboard-search",
+    "filterDropdown": ".filter-dropdown",
+    "exportButton": ".export-button",
+    "refreshButton": ".refresh-button"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "common": {
+    "loadingSpinner": ".loading-spinner",
+    "errorMessage": ".error-message",
+    "successMessage": ".success-message",
+    "modal": ".modal",
+    "modalClose": ".modal .close-button",
+    "button": {
+      "primary": ".btn-primary",
+      "secondary": ".btn-secondary",
+      "danger": ".btn-danger",
+      "submit": "button[type='submit']",
+      "cancel": ".btn-cancel"
+    },
+    "form": {
+      "input": "input[type='text'], input[type='email'], input[type='password']",
+      "textarea": "textarea",
+      "select": "select",
+      "checkbox": "input[type='checkbox']",
+      "radio": "input[type='radio']"
+    },
+    "navigation": {
+      "menu": ".main-menu",
+      "menuItem": ".main-menu li",
+      "breadcrumb": ".breadcrumb",
+      "logout": ".logout-button"
+    },
+    "table": {
+      "container": ".table-container",
+      "header": ".table-header",
+      "row": ".table-row",
+      "cell": ".table-cell"
+    }
+  }
+}

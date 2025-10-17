@@ -1,0 +1,70 @@
+{
+  "name": "test-automation",
+  "version": "1.0.0",
+  "description": "End-to-end automation testing project using Playwright and Cucumber",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:headed": "HEADLESS=false cucumber-js",
+    "test:debug": "DEBUG=true cucumber-js",
+    "test:chrome": "BROWSER=chromium cucumber-js",
+    "test:firefox": "BROWSER=firefox cucumber-js",
+    "test:webkit": "BROWSER=webkit cucumber-js",
+    "test:mobile": "VIEWPORT=mobile cucumber-js",
+    "test:tablet": "VIEWPORT=tablet cucumber-js",
+    "test:smoke": "cucumber-js --tags @smoke",
+    "test:regression": "cucumber-js --tags @regression",
+    "test:login": "cucumber-js features/login.feature",
+    "test:dashboard": "cucumber-js features/dashboard.feature",
+    "test:home": "cucumber-js features/home.feature",
+    "test:parallel": "cucumber-js --parallel 4",
+    "test:report": "cucumber-js --format json:reports/cucumber_report.json",
+    "test:ci": "cucumber-js --format json:reports/cucumber_report.json --parallel 4",
+    "playwright:install": "playwright install",
+    "playwright:install-deps": "playwright install-deps",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "keywords": [
+    "playwright",
+    "cucumber",
+    "e2e",
+    "testing",
+    "automation",
+    "bdd"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.0.0",
+    "@playwright/test": "^1.40.0",
+    "playwright": "^1.40.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "cucumber-html-reporter": "^7.3.0",
+    "cucumber-json-formatter": "^0.0.1",
+    "allure-cucumberjs": "^2.13.0",
+    "allure-commandline": "^2.24.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.0",
+    "moment": "^2.29.0",
+    "faker": "^6.6.6"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/test-automation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/test-automation/issues"
+  },
+  "homepage": "https://github.com/yourusername/test-automation#readme"
+}

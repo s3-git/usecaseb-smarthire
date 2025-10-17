@@ -1,0 +1,24 @@
+{
+  "common": {
+    "pageTitle": "h1",
+    "welcomeMessage": ".welcome-message",
+    "userProfile": ".user-profile"
+  },
+  "home": {
+    "heroSection": ".hero-section",
+    "heroTitle": ".hero-section h1",
+    "heroSubtitle": ".hero-section p",
+    "ctaButton": ".hero-section .cta-button",
+    "featureCards": ".feature-cards",
+    "featureCard": ".feature-card",
+    "featureCardTitle": ".feature-card h3",
+    "featureCardDescription": ".feature-card p",
+    "statsSection": ".stats-section",
+    "statItem": ".stat-item",
+    "statValue": ".stat-value",
+    "statLabel": ".stat-label",
+    "newsletterSignup": ".newsletter-signup",
+    "emailInput": ".newsletter-signup input[type='email']",
+    "subscribeButton": ".newsletter-signup button"
+  }
+}

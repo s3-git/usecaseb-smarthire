@@ -1,0 +1,25 @@
+{
+  "common": {
+    "pageTitle": "h1",
+    "formContainer": ".login-form-container"
+  },
+  "login": {
+    "form": ".login-form",
+    "usernameField": "#username",
+    "passwordField": "#password",
+    "loginButton": ".login-button",
+    "rememberMeCheckbox": "#remember-me",
+    "forgotPasswordLink": ".forgot-password-link",
+    "errorMessage": ".login-error",
+    "successMessage": ".login-success",
+    "validationMessage": ".validation-message",
+    "loadingIndicator": ".login-loading",
+    "socialLogin": {
+      "googleButton": ".google-login-button",
+      "facebookButton": ".facebook-login-button",
+      "linkedinButton": ".linkedin-login-button"
+    },
+    "registerLink": ".register-link",
+    "helpText": ".help-text"
+  }
+}
