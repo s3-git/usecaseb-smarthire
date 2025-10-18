@@ -1,1 +1,7 @@
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS public.chat_messages CASCADE;
+DROP TABLE IF EXISTS public.chat_conversations CASCADE;
+DROP TABLE IF EXISTS public.upload_files CASCADE;
+DROP TABLE IF EXISTS public.applicants CASCADE;
+DROP TABLE IF EXISTS public.alerts CASCADE;
+DROP TABLE IF EXISTS public.jobs CASCADE;
+DROP TABLE IF EXISTS public.users CASCADE;

@@ -28,7 +28,7 @@ type User struct {
 	Email          string    `boil:"email" json:"email" toml:"email" yaml:"email"`
 	PasswordHashed string    `boil:"password_hashed" json:"password_hashed" toml:"password_hashed" yaml:"password_hashed"`
 	PhoneNumber    string    `boil:"phone_number" json:"phone_number" toml:"phone_number" yaml:"phone_number"`
-	Role           string    `boil:"role" json:"role" toml:"role" yaml:"role"`
+	UserRole       string    `boil:"user_role" json:"user_role" toml:"user_role" yaml:"user_role"`
 	CreatedAt      time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt      time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 
@@ -42,7 +42,7 @@ var UserColumns = struct {
 	Email          string
 	PasswordHashed string
 	PhoneNumber    string
-	Role           string
+	UserRole       string
 	CreatedAt      string
 	UpdatedAt      string
 }{
@@ -51,7 +51,7 @@ var UserColumns = struct {
 	Email:          "email",
 	PasswordHashed: "password_hashed",
 	PhoneNumber:    "phone_number",
-	Role:           "role",
+	UserRole:       "user_role",
 	CreatedAt:      "created_at",
 	UpdatedAt:      "updated_at",
 }
@@ -62,7 +62,7 @@ var UserTableColumns = struct {
 	Email          string
 	PasswordHashed string
 	PhoneNumber    string
-	Role           string
+	UserRole       string
 	CreatedAt      string
 	UpdatedAt      string
 }{
@@ -71,87 +71,12 @@ var UserTableColumns = struct {
 	Email:          "users.email",
 	PasswordHashed: "users.password_hashed",
 	PhoneNumber:    "users.phone_number",
-	Role:           "users.role",
+	UserRole:       "users.user_role",
 	CreatedAt:      "users.created_at",
 	UpdatedAt:      "users.updated_at",
 }
 
 // Generated where
-
-type whereHelperint64 struct{ field string }
-
-func (w whereHelperint64) EQ(x int64) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.EQ, x) }
-func (w whereHelperint64) NEQ(x int64) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.NEQ, x) }
-func (w whereHelperint64) LT(x int64) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.LT, x) }
-func (w whereHelperint64) LTE(x int64) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.LTE, x) }
-func (w whereHelperint64) GT(x int64) qm.QueryMod  { return qmhelper.Where(w.field, qmhelper.GT, x) }
-func (w whereHelperint64) GTE(x int64) qm.QueryMod { return qmhelper.Where(w.field, qmhelper.GTE, x) }
-func (w whereHelperint64) IN(slice []int64) qm.QueryMod {
-	values := make([]interface{}, 0, len(slice))
-	for _, value := range slice {
-		values = append(values, value)
-	}
-	return qm.WhereIn(fmt.Sprintf("%s IN ?", w.field), values...)
-}
-func (w whereHelperint64) NIN(slice []int64) qm.QueryMod {
-	values := make([]interface{}, 0, len(slice))
-	for _, value := range slice {
-		values = append(values, value)
-	}
-	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
-}
-
-type whereHelperstring struct{ field string }
-
-func (w whereHelperstring) EQ(x string) qm.QueryMod      { return qmhelper.Where(w.field, qmhelper.EQ, x) }
-func (w whereHelperstring) NEQ(x string) qm.QueryMod     { return qmhelper.Where(w.field, qmhelper.NEQ, x) }
-func (w whereHelperstring) LT(x string) qm.QueryMod      { return qmhelper.Where(w.field, qmhelper.LT, x) }
-func (w whereHelperstring) LTE(x string) qm.QueryMod     { return qmhelper.Where(w.field, qmhelper.LTE, x) }
-func (w whereHelperstring) GT(x string) qm.QueryMod      { return qmhelper.Where(w.field, qmhelper.GT, x) }
-func (w whereHelperstring) GTE(x string) qm.QueryMod     { return qmhelper.Where(w.field, qmhelper.GTE, x) }
-func (w whereHelperstring) LIKE(x string) qm.QueryMod    { return qm.Where(w.field+" LIKE ?", x) }
-func (w whereHelperstring) NLIKE(x string) qm.QueryMod   { return qm.Where(w.field+" NOT LIKE ?", x) }
-func (w whereHelperstring) ILIKE(x string) qm.QueryMod   { return qm.Where(w.field+" ILIKE ?", x) }
-func (w whereHelperstring) NILIKE(x string) qm.QueryMod  { return qm.Where(w.field+" NOT ILIKE ?", x) }
-func (w whereHelperstring) SIMILAR(x string) qm.QueryMod { return qm.Where(w.field+" SIMILAR TO ?", x) }
-func (w whereHelperstring) NSIMILAR(x string) qm.QueryMod {
-	return qm.Where(w.field+" NOT SIMILAR TO ?", x)
-}
-func (w whereHelperstring) IN(slice []string) qm.QueryMod {
-	values := make([]interface{}, 0, len(slice))
-	for _, value := range slice {
-		values = append(values, value)
-	}
-	return qm.WhereIn(fmt.Sprintf("%s IN ?", w.field), values...)
-}
-func (w whereHelperstring) NIN(slice []string) qm.QueryMod {
-	values := make([]interface{}, 0, len(slice))
-	for _, value := range slice {
-		values = append(values, value)
-	}
-	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
-}
-
-type whereHelpertime_Time struct{ field string }
-
-func (w whereHelpertime_Time) EQ(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.EQ, x)
-}
-func (w whereHelpertime_Time) NEQ(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.NEQ, x)
-}
-func (w whereHelpertime_Time) LT(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.LT, x)
-}
-func (w whereHelpertime_Time) LTE(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.LTE, x)
-}
-func (w whereHelpertime_Time) GT(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.GT, x)
-}
-func (w whereHelpertime_Time) GTE(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.GTE, x)
-}
 
 var UserWhere = struct {
 	ID             whereHelperint64
@@ -159,7 +84,7 @@ var UserWhere = struct {
 	Email          whereHelperstring
 	PasswordHashed whereHelperstring
 	PhoneNumber    whereHelperstring
-	Role           whereHelperstring
+	UserRole       whereHelperstring
 	CreatedAt      whereHelpertime_Time
 	UpdatedAt      whereHelpertime_Time
 }{
@@ -168,17 +93,33 @@ var UserWhere = struct {
 	Email:          whereHelperstring{field: "\"users\".\"email\""},
 	PasswordHashed: whereHelperstring{field: "\"users\".\"password_hashed\""},
 	PhoneNumber:    whereHelperstring{field: "\"users\".\"phone_number\""},
-	Role:           whereHelperstring{field: "\"users\".\"role\""},
+	UserRole:       whereHelperstring{field: "\"users\".\"user_role\""},
 	CreatedAt:      whereHelpertime_Time{field: "\"users\".\"created_at\""},
 	UpdatedAt:      whereHelpertime_Time{field: "\"users\".\"updated_at\""},
 }
 
 // UserRels is where relationship names are stored.
 var UserRels = struct {
-}{}
+	Candidate                      string
+	ApplicantUserChatConversations string
+	TaUserChatConversations        string
+	SenderUserChatMessages         string
+	AssigneeUserJobs               string
+}{
+	Candidate:                      "Candidate",
+	ApplicantUserChatConversations: "ApplicantUserChatConversations",
+	TaUserChatConversations:        "TaUserChatConversations",
+	SenderUserChatMessages:         "SenderUserChatMessages",
+	AssigneeUserJobs:               "AssigneeUserJobs",
+}
 
 // userR is where relationships are stored.
 type userR struct {
+	Candidate                      *Candidate            `boil:"Candidate" json:"Candidate" toml:"Candidate" yaml:"Candidate"`
+	ApplicantUserChatConversations ChatConversationSlice `boil:"ApplicantUserChatConversations" json:"ApplicantUserChatConversations" toml:"ApplicantUserChatConversations" yaml:"ApplicantUserChatConversations"`
+	TaUserChatConversations        ChatConversationSlice `boil:"TaUserChatConversations" json:"TaUserChatConversations" toml:"TaUserChatConversations" yaml:"TaUserChatConversations"`
+	SenderUserChatMessages         ChatMessageSlice      `boil:"SenderUserChatMessages" json:"SenderUserChatMessages" toml:"SenderUserChatMessages" yaml:"SenderUserChatMessages"`
+	AssigneeUserJobs               JobSlice              `boil:"AssigneeUserJobs" json:"AssigneeUserJobs" toml:"AssigneeUserJobs" yaml:"AssigneeUserJobs"`
 }
 
 // NewStruct creates a new relationship struct
@@ -186,12 +127,92 @@ func (*userR) NewStruct() *userR {
 	return &userR{}
 }
 
+func (o *User) GetCandidate() *Candidate {
+	if o == nil {
+		return nil
+	}
+
+	return o.R.GetCandidate()
+}
+
+func (r *userR) GetCandidate() *Candidate {
+	if r == nil {
+		return nil
+	}
+
+	return r.Candidate
+}
+
+func (o *User) GetApplicantUserChatConversations() ChatConversationSlice {
+	if o == nil {
+		return nil
+	}
+
+	return o.R.GetApplicantUserChatConversations()
+}
+
+func (r *userR) GetApplicantUserChatConversations() ChatConversationSlice {
+	if r == nil {
+		return nil
+	}
+
+	return r.ApplicantUserChatConversations
+}
+
+func (o *User) GetTaUserChatConversations() ChatConversationSlice {
+	if o == nil {
+		return nil
+	}
+
+	return o.R.GetTaUserChatConversations()
+}
+
+func (r *userR) GetTaUserChatConversations() ChatConversationSlice {
+	if r == nil {
+		return nil
+	}
+
+	return r.TaUserChatConversations
+}
+
+func (o *User) GetSenderUserChatMessages() ChatMessageSlice {
+	if o == nil {
+		return nil
+	}
+
+	return o.R.GetSenderUserChatMessages()
+}
+
+func (r *userR) GetSenderUserChatMessages() ChatMessageSlice {
+	if r == nil {
+		return nil
+	}
+
+	return r.SenderUserChatMessages
+}
+
+func (o *User) GetAssigneeUserJobs() JobSlice {
+	if o == nil {
+		return nil
+	}
+
+	return o.R.GetAssigneeUserJobs()
+}
+
+func (r *userR) GetAssigneeUserJobs() JobSlice {
+	if r == nil {
+		return nil
+	}
+
+	return r.AssigneeUserJobs
+}
+
 // userL is where Load methods for each relationship are stored.
 type userL struct{}
 
 var (
-	userAllColumns            = []string{"id", "full_name", "email", "password_hashed", "phone_number", "role", "created_at", "updated_at"}
-	userColumnsWithoutDefault = []string{"id", "full_name", "email", "password_hashed", "phone_number", "role"}
+	userAllColumns            = []string{"id", "full_name", "email", "password_hashed", "phone_number", "user_role", "created_at", "updated_at"}
+	userColumnsWithoutDefault = []string{"id", "full_name", "email", "password_hashed", "phone_number", "user_role"}
 	userColumnsWithDefault    = []string{"created_at", "updated_at"}
 	userPrimaryKeyColumns     = []string{"id"}
 	userGeneratedColumns      = []string{}
@@ -286,6 +307,942 @@ func (q userQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool,
 	}
 
 	return count > 0, nil
+}
+
+// Candidate pointed to by the foreign key.
+func (o *User) Candidate(mods ...qm.QueryMod) candidateQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"user_id\" = ?", o.ID),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	return Candidates(queryMods...)
+}
+
+// ApplicantUserChatConversations retrieves all the chat_conversation's ChatConversations with an executor via applicant_user_id column.
+func (o *User) ApplicantUserChatConversations(mods ...qm.QueryMod) chatConversationQuery {
+	var queryMods []qm.QueryMod
+	if len(mods) != 0 {
+		queryMods = append(queryMods, mods...)
+	}
+
+	queryMods = append(queryMods,
+		qm.Where("\"chat_conversations\".\"applicant_user_id\"=?", o.ID),
+	)
+
+	return ChatConversations(queryMods...)
+}
+
+// TaUserChatConversations retrieves all the chat_conversation's ChatConversations with an executor via ta_user_id column.
+func (o *User) TaUserChatConversations(mods ...qm.QueryMod) chatConversationQuery {
+	var queryMods []qm.QueryMod
+	if len(mods) != 0 {
+		queryMods = append(queryMods, mods...)
+	}
+
+	queryMods = append(queryMods,
+		qm.Where("\"chat_conversations\".\"ta_user_id\"=?", o.ID),
+	)
+
+	return ChatConversations(queryMods...)
+}
+
+// SenderUserChatMessages retrieves all the chat_message's ChatMessages with an executor via sender_user_id column.
+func (o *User) SenderUserChatMessages(mods ...qm.QueryMod) chatMessageQuery {
+	var queryMods []qm.QueryMod
+	if len(mods) != 0 {
+		queryMods = append(queryMods, mods...)
+	}
+
+	queryMods = append(queryMods,
+		qm.Where("\"chat_messages\".\"sender_user_id\"=?", o.ID),
+	)
+
+	return ChatMessages(queryMods...)
+}
+
+// AssigneeUserJobs retrieves all the job's Jobs with an executor via assignee_user_id column.
+func (o *User) AssigneeUserJobs(mods ...qm.QueryMod) jobQuery {
+	var queryMods []qm.QueryMod
+	if len(mods) != 0 {
+		queryMods = append(queryMods, mods...)
+	}
+
+	queryMods = append(queryMods,
+		qm.Where("\"jobs\".\"assignee_user_id\"=?", o.ID),
+	)
+
+	return Jobs(queryMods...)
+}
+
+// LoadCandidate allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-1 relationship.
+func (userL) LoadCandidate(ctx context.Context, e boil.ContextExecutor, singular bool, maybeUser interface{}, mods queries.Applicator) error {
+	var slice []*User
+	var object *User
+
+	if singular {
+		var ok bool
+		object, ok = maybeUser.(*User)
+		if !ok {
+			object = new(User)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeUser))
+			}
+		}
+	} else {
+		s, ok := maybeUser.(*[]*User)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeUser))
+			}
+		}
+	}
+
+	args := make(map[interface{}]struct{})
+	if singular {
+		if object.R == nil {
+			object.R = &userR{}
+		}
+		args[object.ID] = struct{}{}
+	} else {
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &userR{}
+			}
+
+			args[obj.ID] = struct{}{}
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	argsSlice := make([]interface{}, len(args))
+	i := 0
+	for arg := range args {
+		argsSlice[i] = arg
+		i++
+	}
+
+	query := NewQuery(
+		qm.From(`candidates`),
+		qm.WhereIn(`candidates.user_id in ?`, argsSlice...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load Candidate")
+	}
+
+	var resultSlice []*Candidate
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice Candidate")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for candidates")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for candidates")
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Candidate = foreign
+		if foreign.R == nil {
+			foreign.R = &candidateR{}
+		}
+		foreign.R.User = object
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.ID == foreign.UserID {
+				local.R.Candidate = foreign
+				if foreign.R == nil {
+					foreign.R = &candidateR{}
+				}
+				foreign.R.User = local
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
+// LoadApplicantUserChatConversations allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-M or N-M relationship.
+func (userL) LoadApplicantUserChatConversations(ctx context.Context, e boil.ContextExecutor, singular bool, maybeUser interface{}, mods queries.Applicator) error {
+	var slice []*User
+	var object *User
+
+	if singular {
+		var ok bool
+		object, ok = maybeUser.(*User)
+		if !ok {
+			object = new(User)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeUser))
+			}
+		}
+	} else {
+		s, ok := maybeUser.(*[]*User)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeUser))
+			}
+		}
+	}
+
+	args := make(map[interface{}]struct{})
+	if singular {
+		if object.R == nil {
+			object.R = &userR{}
+		}
+		args[object.ID] = struct{}{}
+	} else {
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &userR{}
+			}
+			args[obj.ID] = struct{}{}
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	argsSlice := make([]interface{}, len(args))
+	i := 0
+	for arg := range args {
+		argsSlice[i] = arg
+		i++
+	}
+
+	query := NewQuery(
+		qm.From(`chat_conversations`),
+		qm.WhereIn(`chat_conversations.applicant_user_id in ?`, argsSlice...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load chat_conversations")
+	}
+
+	var resultSlice []*ChatConversation
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice chat_conversations")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results in eager load on chat_conversations")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for chat_conversations")
+	}
+
+	if singular {
+		object.R.ApplicantUserChatConversations = resultSlice
+		for _, foreign := range resultSlice {
+			if foreign.R == nil {
+				foreign.R = &chatConversationR{}
+			}
+			foreign.R.ApplicantUser = object
+		}
+		return nil
+	}
+
+	for _, foreign := range resultSlice {
+		for _, local := range slice {
+			if local.ID == foreign.ApplicantUserID {
+				local.R.ApplicantUserChatConversations = append(local.R.ApplicantUserChatConversations, foreign)
+				if foreign.R == nil {
+					foreign.R = &chatConversationR{}
+				}
+				foreign.R.ApplicantUser = local
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
+// LoadTaUserChatConversations allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-M or N-M relationship.
+func (userL) LoadTaUserChatConversations(ctx context.Context, e boil.ContextExecutor, singular bool, maybeUser interface{}, mods queries.Applicator) error {
+	var slice []*User
+	var object *User
+
+	if singular {
+		var ok bool
+		object, ok = maybeUser.(*User)
+		if !ok {
+			object = new(User)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeUser))
+			}
+		}
+	} else {
+		s, ok := maybeUser.(*[]*User)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeUser))
+			}
+		}
+	}
+
+	args := make(map[interface{}]struct{})
+	if singular {
+		if object.R == nil {
+			object.R = &userR{}
+		}
+		args[object.ID] = struct{}{}
+	} else {
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &userR{}
+			}
+			args[obj.ID] = struct{}{}
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	argsSlice := make([]interface{}, len(args))
+	i := 0
+	for arg := range args {
+		argsSlice[i] = arg
+		i++
+	}
+
+	query := NewQuery(
+		qm.From(`chat_conversations`),
+		qm.WhereIn(`chat_conversations.ta_user_id in ?`, argsSlice...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load chat_conversations")
+	}
+
+	var resultSlice []*ChatConversation
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice chat_conversations")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results in eager load on chat_conversations")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for chat_conversations")
+	}
+
+	if singular {
+		object.R.TaUserChatConversations = resultSlice
+		for _, foreign := range resultSlice {
+			if foreign.R == nil {
+				foreign.R = &chatConversationR{}
+			}
+			foreign.R.TaUser = object
+		}
+		return nil
+	}
+
+	for _, foreign := range resultSlice {
+		for _, local := range slice {
+			if local.ID == foreign.TaUserID {
+				local.R.TaUserChatConversations = append(local.R.TaUserChatConversations, foreign)
+				if foreign.R == nil {
+					foreign.R = &chatConversationR{}
+				}
+				foreign.R.TaUser = local
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
+// LoadSenderUserChatMessages allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-M or N-M relationship.
+func (userL) LoadSenderUserChatMessages(ctx context.Context, e boil.ContextExecutor, singular bool, maybeUser interface{}, mods queries.Applicator) error {
+	var slice []*User
+	var object *User
+
+	if singular {
+		var ok bool
+		object, ok = maybeUser.(*User)
+		if !ok {
+			object = new(User)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeUser))
+			}
+		}
+	} else {
+		s, ok := maybeUser.(*[]*User)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeUser))
+			}
+		}
+	}
+
+	args := make(map[interface{}]struct{})
+	if singular {
+		if object.R == nil {
+			object.R = &userR{}
+		}
+		args[object.ID] = struct{}{}
+	} else {
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &userR{}
+			}
+			args[obj.ID] = struct{}{}
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	argsSlice := make([]interface{}, len(args))
+	i := 0
+	for arg := range args {
+		argsSlice[i] = arg
+		i++
+	}
+
+	query := NewQuery(
+		qm.From(`chat_messages`),
+		qm.WhereIn(`chat_messages.sender_user_id in ?`, argsSlice...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load chat_messages")
+	}
+
+	var resultSlice []*ChatMessage
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice chat_messages")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results in eager load on chat_messages")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for chat_messages")
+	}
+
+	if singular {
+		object.R.SenderUserChatMessages = resultSlice
+		for _, foreign := range resultSlice {
+			if foreign.R == nil {
+				foreign.R = &chatMessageR{}
+			}
+			foreign.R.SenderUser = object
+		}
+		return nil
+	}
+
+	for _, foreign := range resultSlice {
+		for _, local := range slice {
+			if local.ID == foreign.SenderUserID {
+				local.R.SenderUserChatMessages = append(local.R.SenderUserChatMessages, foreign)
+				if foreign.R == nil {
+					foreign.R = &chatMessageR{}
+				}
+				foreign.R.SenderUser = local
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
+// LoadAssigneeUserJobs allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-M or N-M relationship.
+func (userL) LoadAssigneeUserJobs(ctx context.Context, e boil.ContextExecutor, singular bool, maybeUser interface{}, mods queries.Applicator) error {
+	var slice []*User
+	var object *User
+
+	if singular {
+		var ok bool
+		object, ok = maybeUser.(*User)
+		if !ok {
+			object = new(User)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeUser))
+			}
+		}
+	} else {
+		s, ok := maybeUser.(*[]*User)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeUser)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeUser))
+			}
+		}
+	}
+
+	args := make(map[interface{}]struct{})
+	if singular {
+		if object.R == nil {
+			object.R = &userR{}
+		}
+		args[object.ID] = struct{}{}
+	} else {
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &userR{}
+			}
+			args[obj.ID] = struct{}{}
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	argsSlice := make([]interface{}, len(args))
+	i := 0
+	for arg := range args {
+		argsSlice[i] = arg
+		i++
+	}
+
+	query := NewQuery(
+		qm.From(`jobs`),
+		qm.WhereIn(`jobs.assignee_user_id in ?`, argsSlice...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load jobs")
+	}
+
+	var resultSlice []*Job
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice jobs")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results in eager load on jobs")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for jobs")
+	}
+
+	if singular {
+		object.R.AssigneeUserJobs = resultSlice
+		for _, foreign := range resultSlice {
+			if foreign.R == nil {
+				foreign.R = &jobR{}
+			}
+			foreign.R.AssigneeUser = object
+		}
+		return nil
+	}
+
+	for _, foreign := range resultSlice {
+		for _, local := range slice {
+			if queries.Equal(local.ID, foreign.AssigneeUserID) {
+				local.R.AssigneeUserJobs = append(local.R.AssigneeUserJobs, foreign)
+				if foreign.R == nil {
+					foreign.R = &jobR{}
+				}
+				foreign.R.AssigneeUser = local
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
+// SetCandidate of the user to the related item.
+// Sets o.R.Candidate to related.
+// Adds o to related.R.User.
+func (o *User) SetCandidate(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Candidate) error {
+	var err error
+
+	if insert {
+		related.UserID = o.ID
+
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	} else {
+		updateQuery := fmt.Sprintf(
+			"UPDATE \"candidates\" SET %s WHERE %s",
+			strmangle.SetParamNames("\"", "\"", 1, []string{"user_id"}),
+			strmangle.WhereClause("\"", "\"", 2, candidatePrimaryKeyColumns),
+		)
+		values := []interface{}{o.ID, related.ID}
+
+		if boil.IsDebug(ctx) {
+			writer := boil.DebugWriterFrom(ctx)
+			fmt.Fprintln(writer, updateQuery)
+			fmt.Fprintln(writer, values)
+		}
+		if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+			return errors.Wrap(err, "failed to update foreign table")
+		}
+
+		related.UserID = o.ID
+	}
+
+	if o.R == nil {
+		o.R = &userR{
+			Candidate: related,
+		}
+	} else {
+		o.R.Candidate = related
+	}
+
+	if related.R == nil {
+		related.R = &candidateR{
+			User: o,
+		}
+	} else {
+		related.R.User = o
+	}
+	return nil
+}
+
+// AddApplicantUserChatConversations adds the given related objects to the existing relationships
+// of the user, optionally inserting them as new records.
+// Appends related to o.R.ApplicantUserChatConversations.
+// Sets related.R.ApplicantUser appropriately.
+func (o *User) AddApplicantUserChatConversations(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*ChatConversation) error {
+	var err error
+	for _, rel := range related {
+		if insert {
+			rel.ApplicantUserID = o.ID
+			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
+				return errors.Wrap(err, "failed to insert into foreign table")
+			}
+		} else {
+			updateQuery := fmt.Sprintf(
+				"UPDATE \"chat_conversations\" SET %s WHERE %s",
+				strmangle.SetParamNames("\"", "\"", 1, []string{"applicant_user_id"}),
+				strmangle.WhereClause("\"", "\"", 2, chatConversationPrimaryKeyColumns),
+			)
+			values := []interface{}{o.ID, rel.ID}
+
+			if boil.IsDebug(ctx) {
+				writer := boil.DebugWriterFrom(ctx)
+				fmt.Fprintln(writer, updateQuery)
+				fmt.Fprintln(writer, values)
+			}
+			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+				return errors.Wrap(err, "failed to update foreign table")
+			}
+
+			rel.ApplicantUserID = o.ID
+		}
+	}
+
+	if o.R == nil {
+		o.R = &userR{
+			ApplicantUserChatConversations: related,
+		}
+	} else {
+		o.R.ApplicantUserChatConversations = append(o.R.ApplicantUserChatConversations, related...)
+	}
+
+	for _, rel := range related {
+		if rel.R == nil {
+			rel.R = &chatConversationR{
+				ApplicantUser: o,
+			}
+		} else {
+			rel.R.ApplicantUser = o
+		}
+	}
+	return nil
+}
+
+// AddTaUserChatConversations adds the given related objects to the existing relationships
+// of the user, optionally inserting them as new records.
+// Appends related to o.R.TaUserChatConversations.
+// Sets related.R.TaUser appropriately.
+func (o *User) AddTaUserChatConversations(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*ChatConversation) error {
+	var err error
+	for _, rel := range related {
+		if insert {
+			rel.TaUserID = o.ID
+			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
+				return errors.Wrap(err, "failed to insert into foreign table")
+			}
+		} else {
+			updateQuery := fmt.Sprintf(
+				"UPDATE \"chat_conversations\" SET %s WHERE %s",
+				strmangle.SetParamNames("\"", "\"", 1, []string{"ta_user_id"}),
+				strmangle.WhereClause("\"", "\"", 2, chatConversationPrimaryKeyColumns),
+			)
+			values := []interface{}{o.ID, rel.ID}
+
+			if boil.IsDebug(ctx) {
+				writer := boil.DebugWriterFrom(ctx)
+				fmt.Fprintln(writer, updateQuery)
+				fmt.Fprintln(writer, values)
+			}
+			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+				return errors.Wrap(err, "failed to update foreign table")
+			}
+
+			rel.TaUserID = o.ID
+		}
+	}
+
+	if o.R == nil {
+		o.R = &userR{
+			TaUserChatConversations: related,
+		}
+	} else {
+		o.R.TaUserChatConversations = append(o.R.TaUserChatConversations, related...)
+	}
+
+	for _, rel := range related {
+		if rel.R == nil {
+			rel.R = &chatConversationR{
+				TaUser: o,
+			}
+		} else {
+			rel.R.TaUser = o
+		}
+	}
+	return nil
+}
+
+// AddSenderUserChatMessages adds the given related objects to the existing relationships
+// of the user, optionally inserting them as new records.
+// Appends related to o.R.SenderUserChatMessages.
+// Sets related.R.SenderUser appropriately.
+func (o *User) AddSenderUserChatMessages(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*ChatMessage) error {
+	var err error
+	for _, rel := range related {
+		if insert {
+			rel.SenderUserID = o.ID
+			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
+				return errors.Wrap(err, "failed to insert into foreign table")
+			}
+		} else {
+			updateQuery := fmt.Sprintf(
+				"UPDATE \"chat_messages\" SET %s WHERE %s",
+				strmangle.SetParamNames("\"", "\"", 1, []string{"sender_user_id"}),
+				strmangle.WhereClause("\"", "\"", 2, chatMessagePrimaryKeyColumns),
+			)
+			values := []interface{}{o.ID, rel.ID}
+
+			if boil.IsDebug(ctx) {
+				writer := boil.DebugWriterFrom(ctx)
+				fmt.Fprintln(writer, updateQuery)
+				fmt.Fprintln(writer, values)
+			}
+			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+				return errors.Wrap(err, "failed to update foreign table")
+			}
+
+			rel.SenderUserID = o.ID
+		}
+	}
+
+	if o.R == nil {
+		o.R = &userR{
+			SenderUserChatMessages: related,
+		}
+	} else {
+		o.R.SenderUserChatMessages = append(o.R.SenderUserChatMessages, related...)
+	}
+
+	for _, rel := range related {
+		if rel.R == nil {
+			rel.R = &chatMessageR{
+				SenderUser: o,
+			}
+		} else {
+			rel.R.SenderUser = o
+		}
+	}
+	return nil
+}
+
+// AddAssigneeUserJobs adds the given related objects to the existing relationships
+// of the user, optionally inserting them as new records.
+// Appends related to o.R.AssigneeUserJobs.
+// Sets related.R.AssigneeUser appropriately.
+func (o *User) AddAssigneeUserJobs(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*Job) error {
+	var err error
+	for _, rel := range related {
+		if insert {
+			queries.Assign(&rel.AssigneeUserID, o.ID)
+			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
+				return errors.Wrap(err, "failed to insert into foreign table")
+			}
+		} else {
+			updateQuery := fmt.Sprintf(
+				"UPDATE \"jobs\" SET %s WHERE %s",
+				strmangle.SetParamNames("\"", "\"", 1, []string{"assignee_user_id"}),
+				strmangle.WhereClause("\"", "\"", 2, jobPrimaryKeyColumns),
+			)
+			values := []interface{}{o.ID, rel.ID}
+
+			if boil.IsDebug(ctx) {
+				writer := boil.DebugWriterFrom(ctx)
+				fmt.Fprintln(writer, updateQuery)
+				fmt.Fprintln(writer, values)
+			}
+			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+				return errors.Wrap(err, "failed to update foreign table")
+			}
+
+			queries.Assign(&rel.AssigneeUserID, o.ID)
+		}
+	}
+
+	if o.R == nil {
+		o.R = &userR{
+			AssigneeUserJobs: related,
+		}
+	} else {
+		o.R.AssigneeUserJobs = append(o.R.AssigneeUserJobs, related...)
+	}
+
+	for _, rel := range related {
+		if rel.R == nil {
+			rel.R = &jobR{
+				AssigneeUser: o,
+			}
+		} else {
+			rel.R.AssigneeUser = o
+		}
+	}
+	return nil
+}
+
+// SetAssigneeUserJobs removes all previously related items of the
+// user replacing them completely with the passed
+// in related items, optionally inserting them as new records.
+// Sets o.R.AssigneeUser's AssigneeUserJobs accordingly.
+// Replaces o.R.AssigneeUserJobs with related.
+// Sets related.R.AssigneeUser's AssigneeUserJobs accordingly.
+func (o *User) SetAssigneeUserJobs(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*Job) error {
+	query := "update \"jobs\" set \"assignee_user_id\" = null where \"assignee_user_id\" = $1"
+	values := []interface{}{o.ID}
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, query)
+		fmt.Fprintln(writer, values)
+	}
+	_, err := exec.ExecContext(ctx, query, values...)
+	if err != nil {
+		return errors.Wrap(err, "failed to remove relationships before set")
+	}
+
+	if o.R != nil {
+		for _, rel := range o.R.AssigneeUserJobs {
+			queries.SetScanner(&rel.AssigneeUserID, nil)
+			if rel.R == nil {
+				continue
+			}
+
+			rel.R.AssigneeUser = nil
+		}
+		o.R.AssigneeUserJobs = nil
+	}
+
+	return o.AddAssigneeUserJobs(ctx, exec, insert, related...)
+}
+
+// RemoveAssigneeUserJobs relationships from objects passed in.
+// Removes related items from R.AssigneeUserJobs (uses pointer comparison, removal does not keep order)
+// Sets related.R.AssigneeUser.
+func (o *User) RemoveAssigneeUserJobs(ctx context.Context, exec boil.ContextExecutor, related ...*Job) error {
+	if len(related) == 0 {
+		return nil
+	}
+
+	var err error
+	for _, rel := range related {
+		queries.SetScanner(&rel.AssigneeUserID, nil)
+		if rel.R != nil {
+			rel.R.AssigneeUser = nil
+		}
+		if _, err = rel.Update(ctx, exec, boil.Whitelist("assignee_user_id")); err != nil {
+			return err
+		}
+	}
+	if o.R == nil {
+		return nil
+	}
+
+	for _, rel := range related {
+		for i, ri := range o.R.AssigneeUserJobs {
+			if rel != ri {
+				continue
+			}
+
+			ln := len(o.R.AssigneeUserJobs)
+			if ln > 1 && i < ln-1 {
+				o.R.AssigneeUserJobs[i] = o.R.AssigneeUserJobs[ln-1]
+			}
+			o.R.AssigneeUserJobs = o.R.AssigneeUserJobs[:ln-1]
+			break
+		}
+	}
+
+	return nil
 }
 
 // Users retrieves all the records using an executor.
