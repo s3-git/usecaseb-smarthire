@@ -4,6 +4,9 @@ import PublicRoute from "./PublicRoute"
 import Layout from "@/pages/Layout"
 import Login from "@/pages/Login"
 import Dashboard from "@/pages/Dashboard"
+import CandidateDashboard from "@/pages/Candidate/Dashboard/Dashboard"
+import NotificationPage from "@/pages/Candidate/Notification/Notification"
+import NotificationDetail from "@/pages/Candidate/Notification/NotificationDetail"
 import NotFound from "@/components/NotFound/NotFound"
 
 export const router = createBrowserRouter([
@@ -16,7 +19,12 @@ export const router = createBrowserRouter([
     children: [
       {
         element: <Layout />,
-        children: [{ path: "/", element: <Dashboard /> }]
+        children: [
+          { path: "/", element: <Dashboard /> },
+          { path: "/candidate/dashboard", element: <CandidateDashboard /> },
+          { path: "/notifications", element: <NotificationPage /> },
+          { path: "/notifications/:id", element: <NotificationDetail /> }
+        ]
       }
     ]
   },
