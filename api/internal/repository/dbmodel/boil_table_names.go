@@ -4,7 +4,21 @@
 package dbmodel
 
 var TableNames = struct {
-	Users string
+	Alerts            string
+	Candidates        string
+	ChatConversations string
+	ChatMessages      string
+	JobApplications   string
+	Jobs              string
+	UploadFiles       string
+	Users             string
 }{
-	Users: "users",
+	Alerts:            "alerts",
+	Candidates:        "candidates",
+	ChatConversations: "chat_conversations",
+	ChatMessages:      "chat_messages",
+	JobApplications:   "job_applications",
+	Jobs:              "jobs",
+	UploadFiles:       "upload_files",
+	Users:             "users",
 }
